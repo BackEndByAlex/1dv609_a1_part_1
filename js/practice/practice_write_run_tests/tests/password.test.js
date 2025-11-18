@@ -8,7 +8,7 @@ import { assert, describe, it, expect } from "vitest"
 // import { Password } from "../src/BugMissingPasswordCheck"
 // import { Password } from "../src/BugNeverContainsNumbers"
 // import { Password } from "../src/BugToShortPassword"
-// import { Password } from '../src/BugVeryShort'
+// import { Password } from "../src/BugVeryShort"
 // import { Password } from "../src/BugWrongHashingAlgorithm"
 // import { Password } from '../src/BugWrongMessage'
 import { Password } from "../src/Correct"
@@ -81,5 +81,22 @@ describe("BugNeverContainsNumbers", () => {
     expect(() => {
       new Password(inputpassword)
     }).not.toThrow()
+  })
+})
+
+describe("BugToShortPassword, BugVeryShort", () => {
+  it("should check if password is to shorter < 11 characters ", () => {
+    const inputpassword = "password123"
+
+    expect(() => {
+      new Password(inputpassword)
+    }).toThrow("Too short password")
+  })
+  it("should check if password is to shorter < 6 characters ", () => {
+    const inputpassword = "pass123"
+
+    expect(() => {
+      new Password(inputpassword)
+    }).toThrow("Too short password")
   })
 })
