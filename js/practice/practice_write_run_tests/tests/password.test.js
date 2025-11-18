@@ -4,14 +4,14 @@ import { assert, describe, it, expect } from "vitest"
 // import { Password } from "../src/BugDoesNotHash"
 // import { Password } from "../src/BugDoesNotTrim"
 // import { Password } from "../src/BugisPasswordAlwaysSame"
-import { Password } from "../src/BugMissingNumberCheck"
-// import { Password } from '../src/BugMissingPasswordCheck'
+// import { Password } from "../src/BugMissingNumberCheck"
+// import { Password } from "../src/BugMissingPasswordCheck"
 // import { Password } from '../src/BugNeverContainsNumbers'
-// import { Password } from '../src/BugToShortPassword'
+// import { Password } from "../src/BugToShortPassword"
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from "../src/BugWrongHashingAlgorithm"
 // import { Password } from '../src/BugWrongMessage'
-// import { Password } from "../src/Correct"
+import { Password } from "../src/Correct"
 
 describe("BugDoesNotHash", () => {
   it("should check if the password is hash or not", () => {
@@ -61,5 +61,15 @@ describe("BugMissingNumberCheck", () => {
     expect(() => {
       new Password(inputpassword)
     }).toThrow("No number found")
+  })
+})
+
+describe("BugMissingPasswordCheck", () => {
+  it("should check if password is checked", () => {
+    const inputpassword = "pass12"
+
+    expect(() => {
+      new Password(inputpassword)
+    }).toThrow("Too short password")
   })
 })
