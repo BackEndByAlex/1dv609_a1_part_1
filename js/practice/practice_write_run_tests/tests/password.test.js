@@ -9,8 +9,8 @@ import { assert, describe, it, expect } from "vitest"
 // import { Password } from "../src/BugNeverContainsNumbers"
 // import { Password } from "../src/BugToShortPassword"
 // import { Password } from "../src/BugVeryShort"
-import { Password } from "../src/BugWrongHashingAlgorithm"
-// import { Password } from '../src/BugWrongMessage'
+// import { Password } from "../src/BugWrongHashingAlgorithm"
+// import { Password } from "../src/BugWrongMessage"
 // import { Password } from "../src/Correct"
 
 describe("BugDoesNotHash", () => {
@@ -64,15 +64,15 @@ describe("BugMissingNumberCheck", () => {
   })
 })
 
-describe("BugMissingPasswordCheck", () => {
-  it("should check if password is checked", () => {
-    const inputpassword = "pass12"
+// describe("BugMissingPasswordCheck", () => {
+//   it("should check if password is checked", () => {
+//     const inputpassword = "pass12"
 
-    expect(() => {
-      new Password(inputpassword)
-    }).toThrow("Too short password")
-  })
-})
+//     expect(() => {
+//       new Password(inputpassword)
+//     }).toThrow("Too short password")
+//   })
+// })
 
 describe("BugNeverContainsNumbers", () => {
   it("should check if password has number", () => {
@@ -84,7 +84,7 @@ describe("BugNeverContainsNumbers", () => {
   })
 })
 
-describe("BugToShortPassword, BugVeryShort", () => {
+describe("BugToShortPassword, BugVeryShort and BugMissingPasswordCheck", () => {
   it("should check if password is to shorter < 11 characters ", () => {
     const inputpassword = "password123"
 
@@ -120,5 +120,17 @@ describe("BugWrongHashingAlgorithm", () => {
     const passwordhash = correcthash(passwordTwo)
 
     expect(hashpassword).toBe(passwordhash)
+  })
+})
+
+describe("isPasswordSame", () => {
+  it("should throw invalid argument if the argument is wrong", () => {
+    const inputpassword = new Password("password1234")
+
+    const type = "something is wronge here"
+
+    expect(() => {
+      inputpassword.isPasswordSame(type)
+    }).toThrow("Invalid argument")
   })
 })
