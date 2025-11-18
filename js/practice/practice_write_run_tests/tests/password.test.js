@@ -2,7 +2,7 @@ import { assert, describe, it, expect } from "vitest"
 // Select one of the Password versions to test
 
 // import { Password } from "../src/BugDoesNotHash"
-// import { Password } from '../src/BugDoesNotTrim'
+// import { Password } from "../src/BugDoesNotTrim"
 // import { Password } from '../src/BugisPasswordAlwaysSame'
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugMissingPasswordCheck'
@@ -22,5 +22,20 @@ describe("BugDoesNotHash", () => {
     const hashpassword = password.getPasswordHash()
 
     assert.notEqual(inputpassword, hashpassword)
+  })
+})
+
+describe("BugDoesNotTrim", () => {
+  it("should check if password is trim", () => {
+    const inputpassword = " password 12345 "
+    const expectpassword = "password 12345"
+
+    const passwordOne = new Password(inputpassword)
+    const passwordTwo = new Password(expectpassword)
+
+    const hashpasswordOne = passwordOne.getPasswordHash()
+    const hashpasswordTwo = passwordTwo.getPasswordHash()
+
+    expect(hashpasswordOne).toBe(hashpasswordTwo)
   })
 })
