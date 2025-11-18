@@ -6,7 +6,7 @@ import { assert, describe, it, expect } from "vitest"
 // import { Password } from "../src/BugisPasswordAlwaysSame"
 // import { Password } from "../src/BugMissingNumberCheck"
 // import { Password } from "../src/BugMissingPasswordCheck"
-// import { Password } from '../src/BugNeverContainsNumbers'
+// import { Password } from "../src/BugNeverContainsNumbers"
 // import { Password } from "../src/BugToShortPassword"
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from "../src/BugWrongHashingAlgorithm"
@@ -71,5 +71,15 @@ describe("BugMissingPasswordCheck", () => {
     expect(() => {
       new Password(inputpassword)
     }).toThrow("Too short password")
+  })
+})
+
+describe("BugNeverContainsNumbers", () => {
+  it("should check if password has number", () => {
+    const inputpassword = "password12345"
+
+    expect(() => {
+      new Password(inputpassword)
+    }).not.toThrow()
   })
 })
