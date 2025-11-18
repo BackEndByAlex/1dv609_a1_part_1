@@ -9,9 +9,9 @@ import { assert, describe, it, expect } from "vitest"
 // import { Password } from "../src/BugNeverContainsNumbers"
 // import { Password } from "../src/BugToShortPassword"
 // import { Password } from "../src/BugVeryShort"
-// import { Password } from "../src/BugWrongHashingAlgorithm"
+import { Password } from "../src/BugWrongHashingAlgorithm"
 // import { Password } from '../src/BugWrongMessage'
-import { Password } from "../src/Correct"
+// import { Password } from "../src/Correct"
 
 describe("BugDoesNotHash", () => {
   it("should check if the password is hash or not", () => {
@@ -98,5 +98,27 @@ describe("BugToShortPassword, BugVeryShort", () => {
     expect(() => {
       new Password(inputpassword)
     }).toThrow("Too short password")
+  })
+})
+
+describe("BugWrongHashingAlgorithm", () => {
+  it("should check if hash algorithm is correct", () => {
+    const password = "password1234"
+    const passwordTwo = "password1234"
+
+    function correcthash(input) {
+      let hash = 7
+      for (let i = 0; i < input.length; i++) {
+        hash = hash * 31 + input.charCodeAt(i)
+      }
+      return hash
+    }
+
+    const passwordOne = new Password(password)
+    const hashpassword = passwordOne.getPasswordHash()
+
+    const passwordhash = correcthash(passwordTwo)
+
+    expect(hashpassword).toBe(passwordhash)
   })
 })
