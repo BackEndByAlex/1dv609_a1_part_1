@@ -1,4 +1,4 @@
-import { assert, describe, it, expect } from "vitest"
+import { describe, it, expect } from "vitest"
 // Select one of the Password versions to test
 
 // import { Password } from "../src/BugDoesNotHash"
@@ -6,24 +6,12 @@ import { assert, describe, it, expect } from "vitest"
 // import { Password } from "../src/BugisPasswordAlwaysSame"
 // import { Password } from "../src/BugMissingNumberCheck"
 // import { Password } from "../src/BugMissingPasswordCheck"
-// import { Password } from "../src/BugNeverContainsNumbers"
-// import { Password } from "../src/BugToShortPassword"
+// import { Password } from "../src/BugNeverContainsNumbers" // 5
+import { Password } from "../src/BugToShortPassword"
 // import { Password } from "../src/BugVeryShort"
 // import { Password } from "../src/BugWrongHashingAlgorithm"
 // import { Password } from "../src/BugWrongMessage"
 // import { Password } from "../src/Correct"
-
-describe("BugDoesNotHash", () => {
-  it("should check if the password is hash or not", () => {
-    const inputpassword = "password12345"
-
-    const password = new Password(inputpassword)
-
-    const hashpassword = password.getPasswordHash()
-
-    assert.notEqual(inputpassword, hashpassword)
-  })
-})
 
 describe("BugDoesNotTrim", () => {
   it("should check if password is trim", () => {
@@ -64,16 +52,6 @@ describe("BugMissingNumberCheck", () => {
   })
 })
 
-// describe("BugMissingPasswordCheck", () => {
-//   it("should check if password is checked", () => {
-//     const inputpassword = "pass12"
-
-//     expect(() => {
-//       new Password(inputpassword)
-//     }).toThrow("Too short password")
-//   })
-// })
-
 describe("BugNeverContainsNumbers", () => {
   it("should check if password has number", () => {
     const inputpassword = "password12345"
@@ -85,15 +63,8 @@ describe("BugNeverContainsNumbers", () => {
 })
 
 describe("BugToShortPassword, BugVeryShort and BugMissingPasswordCheck", () => {
-  it("should check if password is to shorter < 11 characters ", () => {
-    const inputpassword = "password123"
-
-    expect(() => {
-      new Password(inputpassword)
-    }).toThrow("Too short password")
-  })
   it("should check if password is to shorter < 6 characters ", () => {
-    const inputpassword = "pass123"
+    const inputpassword = "pass1122222"
 
     expect(() => {
       new Password(inputpassword)
@@ -101,7 +72,7 @@ describe("BugToShortPassword, BugVeryShort and BugMissingPasswordCheck", () => {
   })
 })
 
-describe("BugWrongHashingAlgorithm", () => {
+describe("BugWrongHashingAlgorithm, BugDoesNotHash", () => {
   it("should check if hash algorithm is correct", () => {
     const password = "password1234"
     const passwordTwo = "password1234"
