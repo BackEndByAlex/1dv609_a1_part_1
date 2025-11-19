@@ -7,13 +7,14 @@ import { describe, it, expect } from "vitest"
 // import { Password } from "../src/BugMissingNumberCheck"
 // import { Password } from "../src/BugMissingPasswordCheck"
 // import { Password } from "../src/BugNeverContainsNumbers" // 5
-import { Password } from "../src/BugToShortPassword"
+// import { Password } from "../src/BugToShortPassword"
 // import { Password } from "../src/BugVeryShort"
 // import { Password } from "../src/BugWrongHashingAlgorithm"
 // import { Password } from "../src/BugWrongMessage"
+import { Password } from "../src/NewBugObjectComparison"
 // import { Password } from "../src/Correct"
 
-describe("BugDoesNotTrim", () => {
+describe("Password Trimming", () => {
   it("should check if password is trim", () => {
     const inputpassword = " password 12345 "
     const expectpassword = "password 12345"
@@ -28,7 +29,7 @@ describe("BugDoesNotTrim", () => {
   })
 })
 
-describe("BugisPasswordAlwaysSame", () => {
+describe("Password Equality Check", () => {
   it("should check if passwords are the same", () => {
     const inputpassword = "password 12345"
     const inputpasswordTwo = "password12345"
@@ -42,7 +43,7 @@ describe("BugisPasswordAlwaysSame", () => {
   })
 })
 
-describe("BugMissingNumberCheck", () => {
+describe("Password Complexity: Missing Numbers", () => {
   it("should check if password have numbers", () => {
     const inputpassword = "passwordpassword"
 
@@ -52,7 +53,7 @@ describe("BugMissingNumberCheck", () => {
   })
 })
 
-describe("BugNeverContainsNumbers", () => {
+describe("Valid Password Acceptance", () => {
   it("should check if password has number", () => {
     const inputpassword = "password12345"
 
@@ -62,7 +63,7 @@ describe("BugNeverContainsNumbers", () => {
   })
 })
 
-describe("BugToShortPassword, BugVeryShort and BugMissingPasswordCheck", () => {
+describe("Password Length Validation", () => {
   it("should check if password is to shorter < 6 characters ", () => {
     const inputpassword = "pass1122222"
 
@@ -72,29 +73,20 @@ describe("BugToShortPassword, BugVeryShort and BugMissingPasswordCheck", () => {
   })
 })
 
-describe("BugWrongHashingAlgorithm, BugDoesNotHash", () => {
-  it("should check if hash algorithm is correct", () => {
-    const password = "password1234"
-    const passwordTwo = "password1234"
+describe("Hashing Algorithm", () => {
+  it("should produce the correct hash for 'password1234'", () => {
+    const input = "password1234"
 
-    function correcthash(input) {
-      let hash = 7
-      for (let i = 0; i < input.length; i++) {
-        hash = hash * 31 + input.charCodeAt(i)
-      }
-      return hash
-    }
+    const expectedHash = 8442034857643683000
 
-    const passwordOne = new Password(password)
-    const hashpassword = passwordOne.getPasswordHash()
+    const passwordObj = new Password(input)
+    const actualHash = passwordObj.getPasswordHash()
 
-    const passwordhash = correcthash(passwordTwo)
-
-    expect(hashpassword).toBe(passwordhash)
+    expect(actualHash).toBe(expectedHash)
   })
 })
 
-describe("isPasswordSame", () => {
+describe("Password Comparison: Error Handling", () => {
   it("should throw invalid argument if the argument is wrong", () => {
     const inputpassword = new Password("password1234")
 
