@@ -1,9 +1,14 @@
-| File       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s |
-| ---------- | ------- | -------- | ------- | ------- | ----------------- |
-| All files  | 100     | 100      | 100     | 100     |
-| Correct.js | 100     | 100      | 100     | 100     |
-
-- Test Files 1 passed (1)
-  - Tests 7 passed (7)
-  - Start at 15:32:43
-  - Duration 49ms
+| Bug Version                  | 1. Trimming | 2. Equality | 3. Miss Numbers | 4. Valid PW | 5. Length Val | 6. Hashing | 7. Invalid Arg | STATUS                |
+| :--------------------------- | :---------: | :---------: | :-------------: | :---------: | :-----------: | :--------: | :------------: | :-------------------- |
+| **Correct**                  |     ✅      |     ✅      |       ✅        |     ✅      |      ✅       |     ✅     |       ✅       | **OK**                |
+| **BugDoesNotHash**           |     ✅      |     ✅      |       ✅        |     ✅      |      ✅       |     ❌     |       ✅       | **Caught**            |
+| **BugDoesNotTrim**           |     ❌      |     ✅      |       ✅        |     ✅      |      ✅       |     ✅     |       ✅       | **Caught**            |
+| **BugisPasswordAlwaysSame**  |     ✅      |     ❌      |       ✅        |     ✅      |      ✅       |     ✅     |       ✅       | **Caught**            |
+| **BugMissingNumberCheck**    |     ✅      |     ✅      |       ❌        |     ✅      |      ✅       |     ✅     |       ✅       | **Caught**            |
+| **BugMissingPasswordCheck**  |     ✅      |     ✅      |       ✅        |     ✅      |      ❌       |     ✅     |       ✅       | **Caught**            |
+| **BugNeverContainsNumbers**  |     ❌      |     ❌      |       ✅        |     ❌      |      ✅       |     ❌     |       ❌       | **Caught**            |
+| **BugToShortPassword**       |     ✅      |     ✅      |       ✅        |     ✅      |      ❌       |     ✅     |       ✅       | **Caught**            |
+| **BugVeryShort**             |     ✅      |     ✅      |       ✅        |     ✅      |      ❌       |     ✅     |       ✅       | **Caught**            |
+| **BugWrongHashingAlgorithm** |     ✅      |     ✅      |       ✅        |     ✅      |      ✅       |     ❌     |       ✅       | **Caught**            |
+| **BugWrongMessage**          |     ✅      |     ✅      |       ✅        |     ✅      |      ❌       |     ✅     |       ✅       | **Caught**            |
+| **NewBugObjectComparison**   |     ✅      |     ✅      |       ✅        |     ✅      |      ✅       |     ✅     |       ✅       | **OK ?** (Bug exists) |

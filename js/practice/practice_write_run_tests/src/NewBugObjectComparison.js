@@ -39,8 +39,8 @@ class Password {
     if (!(other instanceof Password)) {
       throw new Error("Invalid argument")
     }
-    // BUGG: Jämför hashen (number) med objektet (Password)
-    // Detta kommer returnera false.
+    // BUGG: Compare hashen (number) with object (Password)
+    // It will return false always
     return this.getPasswordHash() === other
   }
 }

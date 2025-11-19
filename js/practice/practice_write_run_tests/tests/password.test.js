@@ -11,8 +11,8 @@ import { describe, it, expect } from "vitest"
 // import { Password } from "../src/BugVeryShort"
 // import { Password } from "../src/BugWrongHashingAlgorithm"
 // import { Password } from "../src/BugWrongMessage"
-import { Password } from "../src/NewBugObjectComparison"
-// import { Password } from "../src/Correct"
+// import { Password } from "../src/NewBugObjectComparison"
+import { Password } from "../src/Correct"
 
 describe("Password Trimming", () => {
   it("should check if password is trim", () => {
