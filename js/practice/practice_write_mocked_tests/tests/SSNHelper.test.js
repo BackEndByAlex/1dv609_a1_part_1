@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest"
 
-// import { SSNHelper } from "../src/bugs/BuggySSNHelperAllowDayUpTo30"
+import { SSNHelper } from "../src/bugs/BuggySSNHelperAllowDayUpTo30"
 // import { SSNHelper } from "../src/bugs/BuggySSNHelperAllowMonth0"
 // import { SSNHelper } from "../src/bugs/BuggySSNHelperIncorrectFormat"
-import { SSNHelper } from "../src/correct/SSNHelper"
+// import { SSNHelper } from "../src/bugs/BuggySSNHelperMessyLuhn"
+// import { SSNHelper } from "../src/bugs/BuggySSNHelperWrongLength"
+// import { SSNHelper } from "../src/correct/SSNHelper"
 
 describe("Allow upp to 30 days", () => {
   it("isValidDay should return true for valid date on the 31st (t.ex Janary)", () => {
@@ -35,5 +37,29 @@ describe("Check the string format", () => {
     const validFormat = helper.isCorrectFormat(wrongeFormat)
 
     expect(validFormat).toBe(false)
+  })
+})
+
+describe("Check the validation of personumber", () => {
+  it("luhnisCorrest should return a ", () => {
+    const validSSN = "811218-9876"
+
+    const helper = new SSNHelper()
+
+    const isValidDay = helper.luhnisCorrect(validSSN)
+
+    expect(isValidDay).toBe(true)
+  })
+})
+
+describe("Check the lenght of the person number", () => {
+  it("isCorrectLenght should return fakse for the wrong lenght", () => {
+    const validPN = "021201-10232"
+
+    const helper = new SSNHelper()
+
+    const isValidDay = helper.isCorrectLength(validPN)
+
+    expect(isValidDay).toBe(false)
   })
 })
