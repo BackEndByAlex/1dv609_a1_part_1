@@ -15,7 +15,7 @@ import { describe, it, expect } from "vitest"
 import { Password } from "../src/Correct"
 
 describe("Password Trimming", () => {
-  it("should check if password is trim", () => {
+  it(" Constructor should trim whitespace for input with leading and trailing spaces", () => {
     const inputpassword = " password 12345 "
     const expectpassword = "password 12345"
 
@@ -30,7 +30,7 @@ describe("Password Trimming", () => {
 })
 
 describe("Password Equality Check", () => {
-  it("should check if passwords are the same", () => {
+  it("isPasswordSame should return false for different passwords", () => {
     const inputpassword = "password 12345"
     const inputpasswordTwo = "password12345"
 
@@ -44,7 +44,7 @@ describe("Password Equality Check", () => {
 })
 
 describe("Password Complexity: Missing Numbers", () => {
-  it("should check if password have numbers", () => {
+  it("constructor should throw error for password without numbers", () => {
     const inputpassword = "passwordpassword"
 
     expect(() => {
@@ -54,7 +54,7 @@ describe("Password Complexity: Missing Numbers", () => {
 })
 
 describe("Valid Password Acceptance", () => {
-  it("should check if password has number", () => {
+  it("contructor should Not throw Error for valid password with numbers", () => {
     const inputpassword = "password12345"
 
     expect(() => {
@@ -64,7 +64,7 @@ describe("Valid Password Acceptance", () => {
 })
 
 describe("Password Length Validation", () => {
-  it("should check if password is to shorter < 6 characters ", () => {
+  it("constructor Should throw error for password shorter than 11 characters", () => {
     const inputpassword = "pass1122222"
 
     expect(() => {
@@ -74,7 +74,7 @@ describe("Password Length Validation", () => {
 })
 
 describe("Hashing Algorithm", () => {
-  it("should produce the correct hash for 'password1234'", () => {
+  it("getPasswordHash should return correct hash for known password", () => {
     const input = "password1234"
 
     const expectedHash = 8442034857643683000
@@ -87,7 +87,7 @@ describe("Hashing Algorithm", () => {
 })
 
 describe("Password Comparison: Error Handling", () => {
-  it("should throw invalid argument if the argument is wrong", () => {
+  it("isPasswordSame should throw invalid argument error for Non-Password object", () => {
     const inputpassword = new Password("password1234")
 
     const type = "something is wronge here"
