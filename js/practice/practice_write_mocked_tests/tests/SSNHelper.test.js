@@ -1,65 +1,42 @@
 import { describe, expect, it } from "vitest"
 
-import { SSNHelper } from "../src/bugs/BuggySSNHelperAllowDayUpTo30"
-// import { SSNHelper } from "../src/bugs/BuggySSNHelperAllowMonth0"
+// import { SSNHelper } from "../src/bugs/BuggySSNHelperAllowDayUpTo30"
+// import { SSNHelper } from "../src/bugs/BuggySSNHelperAllowMonth0" //2
 // import { SSNHelper } from "../src/bugs/BuggySSNHelperIncorrectFormat"
 // import { SSNHelper } from "../src/bugs/BuggySSNHelperMessyLuhn"
 // import { SSNHelper } from "../src/bugs/BuggySSNHelperWrongLength"
-// import { SSNHelper } from "../src/correct/SSNHelper"
+import { SSNHelper } from "../src/correct/SSNHelper"
 
-describe("Allow upp to 30 days", () => {
-  it("isValidDay should return true for valid date on the 31st (t.ex Janary)", () => {
-    const validSSNcheck31st = "31"
+describe("SSNHelper Methods", () => {
+  const helper = new SSNHelper()
 
-    const helper = new SSNHelper()
-    const validDate = helper.isValidDay(validSSNcheck31st)
+  describe("Validate months and days", () => {
+    it("isValidDay Should Allow A Month Be Upp To 31 Days ", () => {
+      expect(helper.isValidDay(31)).toBe(true)
+    })
 
-    expect(validDate).toBe(true)
+    it("IsValidMonth Should Not Allow A Month Start From 0 ", () => {
+      expect(helper.isValidMonth(0)).toBe(false)
+    })
   })
-})
 
-describe("Allow month 0", () => {
-  it("isValidMounth should return false for valid mounth 0", () => {
-    const validSSNcheck0Mounth = "0"
+  describe("Personal Number Validation", () => {
+    it("IsCorrectFormat Should Return false if wronge format", () => {
+      const wrongFormat = "891011-65252"
 
-    const helper = new SSNHelper()
-    const validMounth = helper.isValidMonth(validSSNcheck0Mounth)
+      expect(helper.isCorrectFormat(wrongFormat)).toBe(false)
+    })
 
-    expect(validMounth).toBe(false)
-  })
-})
+    it("LuhnisCorrest Should Return True For Valid Control Digit", () => {
+      const validSSN = "811218-9876"
 
-describe("Check the string format", () => {
-  it("isCorrectFormat should return false for wronge format", () => {
-    const wrongeFormat = "232212-13212"
+      expect(helper.luhnisCorrect(validSSN)).toBe(true)
+    })
 
-    const helper = new SSNHelper()
-    const validFormat = helper.isCorrectFormat(wrongeFormat)
+    it("IsCorrectLenght Should Return false To A Wrong lenght", () => {
+      const wrongSSN = "021201-10232"
 
-    expect(validFormat).toBe(false)
-  })
-})
-
-describe("Check the validation of personumber", () => {
-  it("luhnisCorrest should return a ", () => {
-    const validSSN = "811218-9876"
-
-    const helper = new SSNHelper()
-
-    const isValidDay = helper.luhnisCorrect(validSSN)
-
-    expect(isValidDay).toBe(true)
-  })
-})
-
-describe("Check the lenght of the person number", () => {
-  it("isCorrectLenght should return fakse for the wrong lenght", () => {
-    const validPN = "021201-10232"
-
-    const helper = new SSNHelper()
-
-    const isValidDay = helper.isCorrectLength(validPN)
-
-    expect(isValidDay).toBe(false)
+      expect(helper.isCorrectLength(wrongSSN)).toBe(false)
+    })
   })
 })

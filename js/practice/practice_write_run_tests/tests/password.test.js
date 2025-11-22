@@ -57,6 +57,7 @@ describe("Password Construction and Validation", () => {
   })
 
   describe("Complexity Validator", () => {
+    // Extension tests for better coverage
     test.each([
       ["passwordpassword", "No digits"],
       // ["PASSWORDONLY", "Uppercase only"],
@@ -73,7 +74,7 @@ describe("Password Construction and Validation", () => {
     )
   })
 
-  it("Constructor Valid Input WIth Numbers Should Succeed", () => {
+  it("Constructor Valid Input With Numbers Should Succeed", () => {
     // Act => Assert
     expect(() => {
       new Password("password1234")
@@ -93,7 +94,7 @@ describe("Password Comparison", () => {
     // Assert
     expect(isSame).toBe(false)
   })
-
+  // Test for 100% Coverage
   // it("isPasswordSame Invalid Object Should Throw Invalid Argument", () => {
   //   const passwordObj = new Password("password1234")
   //   const invalidInput = "not a password object"
