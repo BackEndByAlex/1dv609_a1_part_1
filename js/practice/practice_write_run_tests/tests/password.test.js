@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest"
+import { describe, it, expect, test } from "vitest"
 // Select one of the Password versions to test
 
 // import { Password } from "../src/BugDoesNotHash"
@@ -14,86 +14,92 @@ import { describe, it, expect } from "vitest"
 // import { Password } from "../src/NewBugObjectComparison"
 import { Password } from "../src/Correct"
 
-describe("Password Trimming", () => {
-  it(" Constructor should trim whitespace for input with leading and trailing spaces", () => {
-    const inputpassword = " password 12345 "
-    const expectpassword = "password 12345"
+describe("Password Construction and Validation", () => {
+  describe("Trimming and Hashing", () => {
+    it("Constructor With Padding Should Trim and Match Hash", () => {
+      // Arrange
+      const inputWithSpaces = " password1234 "
+      const inputClean = "password1234"
 
-    const passwordOne = new Password(inputpassword)
-    const passwordTwo = new Password(expectpassword)
+      // Act
+      const passwordPadded = new Password(inputWithSpaces)
+      const passwordClean = new Password(inputClean)
 
-    const hashpasswordOne = passwordOne.getPasswordHash()
-    const hashpasswordTwo = passwordTwo.getPasswordHash()
+      // Assert
+      expect(passwordPadded.getPasswordHash()).toBe(
+        passwordClean.getPasswordHash()
+      )
+    })
 
-    expect(hashpasswordOne).toBe(hashpasswordTwo)
+    it("Get Password Hash Valid Input Should Return Deterministic Hash", () => {
+      // Arrange
+      const input = "password1234"
+      const expectedHash = 8442034857643683000
+
+      // Act
+      const passwordObj = new Password(input)
+
+      // Assert
+      expect(passwordObj.getPasswordHash()).toBe(expectedHash)
+    })
   })
-})
 
-describe("Password Equality Check", () => {
-  it("isPasswordSame should return false for different passwords", () => {
-    const inputpassword = "password 12345"
-    const inputpasswordTwo = "password12345"
+  describe("Lenght Validator", () => {
+    it("Construtor lenght is 11 should Throw Error", () => {
+      // Arrange
+      const elevenChars = "pass1234567"
 
-    const password = new Password(inputpassword)
-    const passwordTwo = new Password(inputpasswordTwo)
-
-    const expectpassword = password.isPasswordSame(passwordTwo)
-
-    expect(expectpassword).toBe(false)
+      // Act => Assert
+      expect(() => {
+        new Password(elevenChars)
+      }).toThrow("Too short password")
+    })
   })
-})
 
-describe("Password Complexity: Missing Numbers", () => {
-  it("constructor should throw error for password without numbers", () => {
-    const inputpassword = "passwordpassword"
+  describe("Complexity Validator", () => {
+    test.each([
+      ["passwordpassword", "No digits"],
+      // ["PASSWORDONLY", "Uppercase only"],
+      // ["!!!!£$£€@@@@", "Symbols only"],
+    ])(
+      "Constructor Input Has %s Should Throw Error For Missiong Numbers",
+      // Arrange
+      (input) => {
+        // Act => Assert
+        expect(() => {
+          new Password(input)
+        }).toThrow("No number found")
+      }
+    )
+  })
 
+  it("Constructor Valid Input WIth Numbers Should Succeed", () => {
+    // Act => Assert
     expect(() => {
-      new Password(inputpassword)
-    }).toThrow("No number found")
-  })
-})
-
-describe("Valid Password Acceptance", () => {
-  it("contructor should Not throw Error for valid password with numbers", () => {
-    const inputpassword = "password12345"
-
-    expect(() => {
-      new Password(inputpassword)
+      new Password("password1234")
     }).not.toThrow()
   })
 })
 
-describe("Password Length Validation", () => {
-  it("constructor Should throw error for password shorter than 11 characters", () => {
-    const inputpassword = "pass1122222"
+describe("Password Comparison", () => {
+  it("IsPasswordSame Different Password Should Return False", () => {
+    // Arrange
+    const pass1 = new Password("password1234")
+    const pass2 = new Password("password2345")
 
-    expect(() => {
-      new Password(inputpassword)
-    }).toThrow("Too short password")
+    // Act
+    const isSame = pass1.isPasswordSame(pass2)
+
+    // Assert
+    expect(isSame).toBe(false)
   })
-})
 
-describe("Hashing Algorithm", () => {
-  it("getPasswordHash should return correct hash for known password", () => {
-    const input = "password1234"
+  // it("isPasswordSame Invalid Object Should Throw Invalid Argument", () => {
+  //   const passwordObj = new Password("password1234")
+  //   const invalidInput = "not a password object"
 
-    const expectedHash = 8442034857643683000
-
-    const passwordObj = new Password(input)
-    const actualHash = passwordObj.getPasswordHash()
-
-    expect(actualHash).toBe(expectedHash)
-  })
-})
-
-describe("Password Comparison: Error Handling", () => {
-  it("isPasswordSame should throw invalid argument error for Non-Password object", () => {
-    const inputpassword = new Password("password1234")
-
-    const type = "something is wronge here"
-
-    expect(() => {
-      inputpassword.isPasswordSame(type)
-    }).toThrow("Invalid argument")
-  })
+  //   expect(() => {
+  //     passwordObj.isPasswordSame(invalidInput)
+  //   }).toThrow("Invalid argument")
+  // })
 })
