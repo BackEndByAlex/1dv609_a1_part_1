@@ -1,7 +1,7 @@
-| Bug Version                                    | 1. Validate Length | 2. Validate trim | 3. Validate alghoritm | 4. Validate year | STATUS     |
-| :--------------------------------------------- | :----------------: | :--------------: | :-------------------: | :--------------: | :--------- |
-| **SwedishSocialSecurityNumber**                |         ✅         |        ✅        |          ✅           |        ✅        | **OK**     |
-| **BuggySwedishSocialSecurityNumberNoLenCheck** |         ❌         |        ✅        |          ✅           |        ✅        | **Caught** |
-| **BuggySwedishSocialSecurityNumberNoTrim**     |         ❌         |        ❌        |          ✅           |        ✅        | **Caught** |
-| **BuggySwedishSocialSecutityNumberNoLuhn**     |         ✅         |        ✅        |          ❌           |        ✅        | **Caught** |
-| **BuggySwedishSocialSecutityNumberWrongYear**  |         ✅         |        ✅        |          ✅           |        ❌        | **Caught** |
+| Bug Version                                    | 1. Validate Length | 2. Validate trim | 3. Validate alghoritm | 4. Validate year | 5. Retrive SN | 6. Validate format | 7. Validate Day | 8. Validate Day | STATUS     |
+| :--------------------------------------------- | :----------------: | :--------------: | :-------------------: | :--------------: | :------------ | :----------------- | :-------------- | :-------------- | :--------- |
+| **SwedishSocialSecurityNumber**                |         ✅         |        ✅        |          ✅           |        ✅        | ✅            | ✅                 | ✅              | ✅              | **OK**     |
+| **BuggySwedishSocialSecurityNumberNoLenCheck** |         ❌         |        ✅        |          ✅           |        ✅        | ✅            | ✅                 | ✅              | ✅              | **Caught** |
+| **BuggySwedishSocialSecurityNumberNoTrim**     |         ❌         |        ❌        |          ✅           |        ✅        | ✅            | ✅                 | ✅              | ✅              | **Caught** |
+| **BuggySwedishSocialSecutityNumberNoLuhn**     |         ✅         |        ✅        |          ❌           |        ✅        | ✅            | ✅                 | ✅              | ✅              | **Caught** |
+| **BuggySwedishSocialSecutityNumberWrongYear**  |         ✅         |        ✅        |          ✅           |        ❌        | ✅            | ✅                 | ✅              | ✅              | **Caught** |
