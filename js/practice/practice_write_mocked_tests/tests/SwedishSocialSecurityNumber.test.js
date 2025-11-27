@@ -19,7 +19,7 @@ describe("SwedishSocialSecurityNumber Controller and Validation", () => {
     }
   })
 
-  it("Constructor Should Throw Error if the lenght if wrong", () => {
+  it("Constructor Should Throw Error if the length if wrong", () => {
     helper.isCorrectLength.mockReturnValue(false)
 
     expect(() => {
@@ -42,11 +42,11 @@ describe("SwedishSocialSecurityNumber Controller and Validation", () => {
     expect(helper.isCorrectLength).toHaveBeenCalledWith(expectedInput)
   })
 
-  it("Constructor Should Throw Error For Wrong Alghoritm", () => {
+  it("Constructor Should Throw Error For Wrong Algorithm", () => {
     helper.luhnisCorrect.mockReturnValue(false)
 
     expect(() => {
-      new SwedishSocialSecurityNumber("811218-9876", helper)
+      new SwedishSocialSecurityNumber("811218%9876", helper)
     }).toThrowError("Invalid SSN according to Luhn's algorithm")
   })
 
@@ -58,7 +58,7 @@ describe("SwedishSocialSecurityNumber Controller and Validation", () => {
     }).toThrow("Incorrect format, must be: YYMMDD-XXXX")
   })
 
-  it("Coctructor Should Throw error for wrong day", () => {
+  it("Constructor Should Throw error for wrong day", () => {
     helper.isValidDay.mockReturnValue(false)
 
     expect(() => {
@@ -66,7 +66,7 @@ describe("SwedishSocialSecurityNumber Controller and Validation", () => {
     }).toThrow("Invalid month in SSN")
   })
 
-  it("Coctructor Should Throw error for wrong month", () => {
+  it("Constructor Should Throw error for wrong month", () => {
     helper.isValidMonth.mockReturnValue(false)
 
     expect(() => {
