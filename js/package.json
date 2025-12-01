@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "vitest ./practice_write_run_tests/tests/password.test.js --coverage",
-    "SSHtest": "vitest ./practice_write_mocked_tests/tests/SSNHelper.test.js --coverage",
-    "SSStest": "vitest ./practice_write_mocked_tests/tests/SwedishSocialSecurityNumber.test.js --coverage"
+    "test": "vitest ./practice_write_run_tests/tests/password.test.js --coverage --coverage.reportOnFailure=true",
+    "SSHtest": "vitest ./practice_write_mocked_tests/tests/SSNHelper.test.js --coverage --coverage.reportOnFailure=true",
+    "SSStest": "vitest ./practice_write_mocked_tests/tests/SwedishSocialSecurityNumber.test.js --coverage --coverage.reportOnFailure=true"
   },
   "keywords": [],
   "author": "",
